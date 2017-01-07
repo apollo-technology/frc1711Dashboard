@@ -22,12 +22,53 @@
             </div>
         </li>
     </ul>
+    <div class="w3-container w3-green w3-padding-4">
+        <h2 class="w3-text-light-grey w3-green w3-center">Ground Scouting</h2>
+        <buttion class="w3-btn-floating w3-xlarge w3-text-light-grey w3-green">
+            <img src="http://www.free-icons-download.net/images/open--trash-can-icon-74608.png" height="70%" width="70% id=" newTable ""/>
+            </button>
+    </div>
+    <table class="w3-table-all w3-large" id="id01">
+        <tr>
+            <th>Team</th>
+            <th>Number</th>
+        </tr>
+        <tr w3-repeat="teams" class="w3-ul w3-border w3-hover-green">
+            <th>{{name}}</th>
+            <th>{{number}}</th>
+        </tr>
+    </table>
 </body>
-
 <script type="text/javascript">
 Parse.initialize("raptors", "nil", "aTech6399");
 Parse.serverURL = 'http://45.55.72.47:1337/parse';
-</script>
 
+var teams = [];
+
+var TeamsQuery = Parse.Object.extend("gS1711");
+var query = new Parse.Query(TeamsQuery);
+query.ascending("number");
+query.find({
+    success: function(results) {
+    	console.log(results);
+        for (var i = 0; i < results.length; i++) {
+            var object = results[i];
+            teams.push({
+                "name": object.get("name"),
+                "number": object.get("number"),
+                "id": object.id
+            });
+        }
+        var dataObject = {
+            "teams": teams
+        };
+        w3DisplayData("id01", dataObject);
+
+    },
+    error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
+    }
+});
+</script>
 
 </html>
