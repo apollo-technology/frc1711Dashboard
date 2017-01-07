@@ -22,11 +22,40 @@
             </div>
         </li>
     </ul>
+    <div class="w3-container w3-green w3-padding-4">
+        <h2 class="w3-text-light-grey w3-green w3-center">Ground Scouting</h2>
+        <buttion class="w3-btn-floating w3-xlarge w3-text-light-grey w3-green">
+            <img src="http://www.free-icons-download.net/images/open--trash-can-icon-74608.png" height="70%" width="70% id="newTable""/>
+        </button>
+    </div>
+    <script>
+    var teamNames = Parse.Object.extend("");
+    var query = new Parse.Query();
+    query.get(, {
+        success:function():{
+            //object was saved
+        } error:function(, error):{
+            //there was an error
+        }
+    });
+
+    </script>
+
+    <table class="w3-table-all w3-large">
+        <tr>
+            <th>Team</th>
+            <th>Number</th>
+        </tr>
+        <tr class="w3-hover-green">
+            <th>team name</th>
+            <th>team number</th>
+        </tr>
+    </table>
 </body>
 
 <script type="text/javascript">
-	Parse.initialize("chs","nil","aTech6399");
-	Parse.serverURL = 'http://45.55.147.99:1337/parse';
+	Parse.initialize("raptors","nil","aTech6399");
+	Parse.serverURL = 'http://45.55.72.47:1337/parse';
 </script>
 
 </html>
