@@ -9,6 +9,11 @@
     <script src="w3data.js"></script>
 </head>
 
+<script type="text/javascript">
+    Parse.initialize("raptors","nil","aTech6399");
+    Parse.serverURL = 'http://45.55.72.47:1337/parse';
+</script>
+
 <body class="w3-white">
     <ul class="w3-navbar w3-light-grey">
         <li><a href="index.html">Home</a></li>
@@ -29,33 +34,33 @@
         </button>
     </div>
     <script>
-    var teamNames = Parse.Object.extend("");
-    var query = new Parse.Query();
-    query.get(, {
-        success:function():{
-            //object was saved
-        } error:function(, error):{
-            //there was an error
+    var teamNames = Parse.Object.extend("gS1711");
+    var query = new Parse.Query(teamNames);
+    query.equalTo("name");
+    query.get({
+            success: function(object) {
+            // Successfully retrieved the object.
+            alert("object retrieved");
+        },
+            error: function(error) {
+            alert("Error: " + error.code + " " + error.message);
         }
     });
-
     </script>
-
+    
     <table class="w3-table-all w3-large">
         <tr>
             <th>Team</th>
             <th>Number</th>
         </tr>
-        <tr class="w3-hover-green">
-            <th>team name</th>
-            <th>team number</th>
+        <tr id="id01" class="w3-ul w3-border w3-hover-green">
+            <th>{{name}}</th>
+            <th>{{number}}</th>
         </tr>
     </table>
+     <script>
+    w3DisplayData("id01", teamNames);
+    </script>
 </body>
-
-<script type="text/javascript">
-	Parse.initialize("raptors","nil","aTech6399");
-	Parse.serverURL = 'http://45.55.72.47:1337/parse';
-</script>
 
 </html>
