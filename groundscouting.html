@@ -71,6 +71,11 @@ query.find({
         alert("Error: " + error.code + " " + error.message);
     }
 });
+
+function trackIndex(x) {
+    var index = x.rowIndex+1;
+    window.open("groundscoutingmatches.html" + "?match="+index, "_self")
+}
 </script>
 
 </html>

@@ -1,1 +1,57 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+    <title>frc1711 - Ground Scouting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <script src="parse.js"></script>
+    <script src="w3data.js"></script>
+
+</head>
+
+<body class="w3-white">
+    <ul class="w3-navbar w3-light-grey">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="groundscouting.html" class="w3-green">Ground Scouting</a></li>
+        <li><a href="scouting.html">Scouting</a></li>
+        <li class="w3-dropdown-hover">
+            <a href="#">More</a>
+            <div class="w3-dropdown-content w3-white w3-card-4">
+                <a href="http://www.raptors1711.com">View 1711 Main Website</a>
+                <a href="https://www.thebluealliance.com/">View The Blue Alliance</a>
+            </div>
+        </li>
+        <li class="w3-right"><img src=""/></li>
+    </ul>
+    <div class="w3-container w3-green w3-padding-4">
+        <h2 class="w3-text-light-grey w3-green w3-center" id="namenumberlabel">i</h2>
+        <button class="w3-btn-floating w3-xlarge w3-text-light-grey w3-green">
+            <img src="http://www.free-icons-download.net/images/open--trash-can-icon-74608.png" height="85%" width="70% id="newTable""/>
+            </button>
+    </div>
+</body>
+<script type="text/javascript">
+Parse.initialize("raptors", "nil", "aTech6399");
+Parse.serverURL = 'http://45.55.72.47:1337/parse';
+
+var teamNumber = getURIParameter("number").toString();
+console.log(teamNumber);
+
+var teamName = getURIParameter("name").toString();
+console.log(teamName);
+
+document.getElementById("teamnumberLabel").innerHTML = teamName + " " + teamNumber;
+
+function getURIParameter(param, asArray) {
+    return document.location.search.substring(1).split('&').reduce(function(p, c) {
+        var parts = c.split('=', 2).map(function(param) {
+            return decodeURIComponent(param);
+        });
+        if (parts.length == 0 || parts[0] != param) return (p instanceof Array) && !asArray ? null : p;
+        return asArray ? p.concat(parts.concat(true)[1]) : parts.concat(true)[1];
+    }, []);
+}
+</script>
+
+</html>
