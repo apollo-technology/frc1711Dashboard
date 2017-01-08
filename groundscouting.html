@@ -28,7 +28,25 @@
             <img src="http://www.free-icons-download.net/images/open--trash-can-icon-74608.png" height="70%" width="70% id=" newTable ""/>
             </button>
     </div>
+<<<<<<< Updated upstream
     <table class="w3-table-all w3-large" id="id01">
+=======
+    <script>
+    var teamNames = Parse.Object.extend("gS1711");
+    var query = new Parse.Query(teamNames);
+    query.equalTo(name);
+    query.get({
+            success: function(object) {
+            // Successfully retrieved the object.
+            alert("object retrieved");
+        },
+            error: function(error) {
+            alert("Error: " + error.code + " " + error.message);
+        }
+    });
+    </script>
+    <table class="w3-table-all w3-large">
+>>>>>>> Stashed changes
         <tr>
             <th>Team</th>
             <th>Number</th>
