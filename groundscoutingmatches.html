@@ -178,16 +178,8 @@
 Parse.initialize("raptors", "nil", "aTech6399");
 Parse.serverURL = 'http://45.55.72.47:1337/parse';
 
-var teamNumber = getURIParameter("teamnumber");
+var teamNumber = getURIParameter("number");
 console.log(teamNumber);
-
-var teamName = getURIParameter("teamname");
-console.log(teamName);
-
-document.getElementById("namenumberLabel").innerHTML = teamName + " " + teamNumber;
-
-document.getElementById("nameLabel").innerHTML = teamName;
-document.getElementById("numberLabel").innerHTML = teamNumber;
 
 function getURIParameter(param, asArray) {
     return document.location.search.substring(1).split('&').reduce(function(p, c) {
@@ -198,12 +190,27 @@ function getURIParameter(param, asArray) {
         return asArray ? p.concat(parts.concat(true)[1]) : parts.concat(true)[1];
     }, []);
 }
+var TeamsQuery = Parse.Object.extend("gs1711");
+var query = new Parse.Query(TeamsQuery);
+query.equalTo("number", teamNumber);
+query.first({
+    success: function(object) {
+        var teamNumber = object.get(teamNumber);
+        document.getElementById("numberLabel").innerHTML = teamObject["number"];
+        document.getElementById("nameLabel").innerHTML = teamObject["name"];
+        document.getElementById("namenumberLabel").innerHTML = nameLabel+""+numberLabel;
+    },
+    error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
+    }
+});
+
 document.getElementById("moreDataButton").onClick = function() {
     moreDataScript()
 };
 
 function moreDataScript() {
-    window.open("https://www.thebluealliance.com/team/" +teamNumber+"_self");
+    window.open("https://www.thebluealliance.com/team/" + teamNumber + "_self");
 }
 </script>
 
