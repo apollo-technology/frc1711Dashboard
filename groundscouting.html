@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     <script src="parse.js"></script>
     <script src="w3data.js"></script>
-
 </head>
 
 <body class="w3-white">
@@ -22,13 +21,13 @@
                 <a href="https://www.thebluealliance.com/">View The Blue Alliance</a>
             </div>
         </li>
-        <li class="w3-right"><img src=""/></li>
+        <li class="w3-right"><img src="" />raptors logo</li>
     </ul>
     <div class="w3-container w3-green w3-padding-4">
         <h2 class="w3-text-light-grey w3-green w3-center">Ground Scouting</h2>
-        <button class="w3-btn-floating w3-xlarge w3-text-light-grey w3-green">
-            <img src="http://www.free-icons-download.net/images/open--trash-can-icon-74608.png" height="85%" width="70% id="newTable""/>
-            </button>
+        <button class="w3-btn-floating w3-xlarge w3-text-light-grey w3-green" id="newTable">
+            <img src="http://www.free-icons-download.net/images/open--trash-can-icon-74608.png" height="85%" width="70%"/>
+        </button>
     </div>
     <table class="w3-table-all w3-large" id="id01">
         <tr>
@@ -52,7 +51,7 @@ var query = new Parse.Query(TeamsQuery);
 query.ascending("number");
 query.find({
     success: function(results) {
-    	console.log(results);
+        console.log(results);
         for (var i = 0; i < results.length; i++) {
             var object = results[i];
             teams.push({
@@ -73,8 +72,8 @@ query.find({
 });
 
 function trackIndex(x) {
-    var index = x.rowIndex+1;
-    window.open("groundscoutingmatches.html" + "?name="+index, "?number="+index, "_self")
+    var index = x.rowIndex - 1;
+    window.open("groundscoutingmatches.html?number=" + index, "_self");
 }
 </script>
 
