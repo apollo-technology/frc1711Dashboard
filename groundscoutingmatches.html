@@ -107,8 +107,8 @@
         <div class="teleopSwitchDiv">
             <label class="w3-text-green heightDiv"><b>Shoot High Goal</b></label>
             <label class="w3-right switch">
-                <input type="checkbox" id="telHighGoal" unchecked>
-                <div class="slider round"></div>
+                <input type="checkbox" id="telHighGoalCheck" unchecked>
+                <div class="slider round" id="telHighGoalSlide"></div>
             </label>
         </div>
         <div class="teleopSwitchDiv">
@@ -211,7 +211,16 @@ document.getElementById("moreDataButton").onClick = function() {
 
 function moreDataScript() {
     window.open("https://www.thebluealliance.com/team/" + numberLabel + "_self");
-}
+};
+
+document.getElementById("telHighGoalSlide").onClick = function() {
+    telHighFunc()
+};
+
+function telHighFunc() {
+    var x = document.getElementById("telHighGoalCheck").checked;
+};
+
 </script>
 
 </html>
