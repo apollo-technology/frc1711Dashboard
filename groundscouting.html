@@ -35,8 +35,8 @@
             <th>Number</th>
         </tr>
         <tr w3-repeat="teams" class="w3-ul w3-border w3-hover-green" onclick="trackIndex(this)">
-            <th>{{name}}</th>
-            <th>{{number}}</th>
+            <th>{{teamname}}</th>
+            <th>{{teamnumber}}</th>
         </tr>
     </table>
 </body>
@@ -55,8 +55,8 @@ query.find({
         for (var i = 0; i < results.length; i++) {
             var object = results[i];
             teams.push({
-                "name": object.get("name"),
-                "number": object.get("number"),
+                "teamname": object.get("name"),
+                "teamnumber": object.get("number"),
                 "id": object.id
             });
         }

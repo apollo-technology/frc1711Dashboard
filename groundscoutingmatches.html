@@ -98,65 +98,65 @@
     </ul>
     <div class="w3-container w3-green w3-padding-4">
         <h2 class="w3-text-light-grey w3-green w3-center" id="namenumberLabel">i</h2>
-        <button class="w3-green w3-right" id="uploadButton">
+        <button class="w3-green w3-right w3-round-xxlarge" id="uploadButton">
             <i class="fa fa-cloud-upload" style="font-size:48px; color:white"></i>
         </button>
     </div>
     <h1 class="w3-text-green">Teleop</h1>
-    <form class="w3-container w3-card-4 w3-padding-4" action="form.asp">
+    <form class="w3-container w3-card-4 w3-padding-4">
         <div class="teleopSwitchDiv">
             <label class="w3-text-green heightDiv"><b>Shoot High Goal</b></label>
             <label class="w3-right switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" id="telHighGoal" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
         <div class="teleopSwitchDiv">
             <label class="w3-text-green heightDiv"><b>Shoot Low Goal</b></label>
             <label class="w3-right switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
         <div class="teleopSwitchDiv">
             <label class="w3-text-green heightDiv"><b>Deliver Gear</b></label>
             <label class="w3-right switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
         <p>
             <label class="w3-text-green"><b>Ball Capacity</b></label>
-            <input class="w3-input w3-border" id="ballCapacity" type="text" placeholder="#">
+            <input class="w3-input w3-border" id="ballCapacity" type="number" placeholder="#">
         </p>
         <div class="teleopSwitchDiv">
             <label class="w3-text-green heightDiv"><b>Scale Rope</b></label>
             <label class="w3-right switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
     </form>
     <h1 class="w3-text-green">Auton</h1>
-    <form class="w3-container w3-card-4 w3-padding-4" action="form.asp">
+    <form class="w3-container w3-card-4 w3-padding-4">
         <div class="autonSwitchDiv">
             <label class="w3-text-green heightDiv"><b>Shoot High Goal</b></label>
             <label class="w3-right switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
         <div class="autonSwitchDiv">
             <label class="w3-text-green heightDiv"><b>Shoot Low Goal</b></label>
             <label class="w3-right switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
         <div class="autonSwitchDiv">
             <label class="w3-text-green heightDiv"><b>Cross Base Line</b></label>
             <label class="w3-right switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
@@ -178,10 +178,10 @@
 Parse.initialize("raptors", "nil", "aTech6399");
 Parse.serverURL = 'http://45.55.72.47:1337/parse';
 
-var teamNumber = getURIParameter("number").toString();
+var teamNumber = getURIParameter("teamnumber");
 console.log(teamNumber);
 
-var teamName = getURIParameter("name").toString();
+var teamName = getURIParameter("teamname");
 console.log(teamName);
 
 document.getElementById("namenumberLabel").innerHTML = teamName + " " + teamNumber;
@@ -198,11 +198,13 @@ function getURIParameter(param, asArray) {
         return asArray ? p.concat(parts.concat(true)[1]) : parts.concat(true)[1];
     }, []);
 }
-document.getElementById("moreDataButton").onClick = function() {runScript()};
-function runScript() {
-window.open("https://www.thebluealliance.com/team/" + teamNumber);
-}
+document.getElementById("moreDataButton").onClick = function() {
+    moreDataScript()
+};
 
+function moreDataScript() {
+    window.open("https://www.thebluealliance.com/team/" +teamNumber+"_self");
+}
 </script>
 
 </html>
