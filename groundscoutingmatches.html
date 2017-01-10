@@ -103,7 +103,7 @@
         </button>
     </div>
     <h1 class="w3-text-green">Teleop</h1>
-    <form class="w3-container w3-card-4 w3-padding-4">
+    <div class="w3-container w3-card-4 w3-padding-4">
         <div class="teleopSwitchDiv">
             <label class="w3-text-green heightDiv"><b>Shoot High Goal</b></label>
             <label class="w3-right switch">
@@ -136,9 +136,9 @@
                 <div class="slider round"></div>
             </label>
         </div>
-    </form>
+    </div>
     <h1 class="w3-text-green">Auton</h1>
-    <form class="w3-container w3-card-4 w3-padding-4">
+    <div class="w3-container w3-card-4 w3-padding-4">
         <div class="autonSwitchDiv">
             <label class="w3-text-green heightDiv"><b>Shoot High Goal</b></label>
             <label class="w3-right switch">
@@ -160,9 +160,9 @@
                 <div class="slider round"></div>
             </label>
         </div>
-    </form>
+    </div>
     <h1 class="w3-text-green">Team Info</h1>
-    <form class="w3-container w3-card-4 w3-padding-4">
+    <div class="w3-container w3-card-4 w3-padding-4">
         <div class="teleopSwitchDiv">
             <label class="w3-text-green heightDiv" id="nameLabel"><b>Name: i</b></label>
         </div>
@@ -172,7 +172,7 @@
         <button class="w3-green w3-left w3-round-xlarge" id="moreDataButton">
             <i class="" style="font-size:20px; color:white">More Data</i>
         </button>
-    </form>
+    </div>
 </body>
 <script type="text/javascript">
 Parse.initialize("raptors", "nil", "aTech6399");
@@ -198,7 +198,7 @@ query.first({
         var teamNumber = object.get(teamNumber);
         document.getElementById("numberLabel").innerHTML = teamObject["number"];
         document.getElementById("nameLabel").innerHTML = teamObject["name"];
-        document.getElementById("namenumberLabel").innerHTML = nameLabel+""+numberLabel;
+        document.getElementById("namenumberLabel").innerHTML = nameLabel + "" + numberLabel;
     },
     error: function(error) {
         alert("Error: " + error.code + " " + error.message);
@@ -210,7 +210,7 @@ document.getElementById("moreDataButton").onClick = function() {
 };
 
 function moreDataScript() {
-    window.open("https://www.thebluealliance.com/team/" + teamNumber + "_self");
+    window.open("https://www.thebluealliance.com/team/" + numberLabel + "_self");
 }
 </script>
 
