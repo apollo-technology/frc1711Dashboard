@@ -198,7 +198,7 @@ query.first({
         var teamNumber = object.get(teamNumber);
         document.getElementById("numberLabel").innerHTML = teamObject["number"];
         document.getElementById("nameLabel").innerHTML = teamObject["name"];
-        document.getElementById("namenumberLabel").innerHTML = nameLabel + "" + numberLabel;
+        document.getElementById("namenumberLabel").innerHTML = nameLabel + " " + numberLabel;
     },
     error: function(error) {
         alert("Error: " + error.code + " " + error.message);
