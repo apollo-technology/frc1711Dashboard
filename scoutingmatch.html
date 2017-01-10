@@ -25,32 +25,14 @@
     <div class="w3-container w3-green w3-padding-4">
         <h2 class="w3-text-light-grey w3-green w3-center" id="matchLabel"></h2>
     </div>
-    <ul class="w3-ul w3-border">
-        <div class="w3-row">
-            <div class="w3-half w3-container">
-                <li>
-                    <h2>Blue Alliance</h2>
-                </li>
-                <li class="w3-hover-light-grey" id="blueTeam1" onclick="trackIndex(this)"></li>
-                <li class="w3-hover-light-grey" id="blueTeam2" onclick="trackIndex(this)"></li>
-                <li class="w3-hover-light-grey" id="blueTeam3" onclick="trackIndex(this)"></li>
-            </div>
-            <div class="w3-half w3-container">
-                <li>
-                    <h2>Red Alliance</h2>
-                </li>
-                <li class="w3-hover-light-grey" id="redTeam1" onclick="trackIndex(this)"></li>
-                <li class="w3-hover-light-grey" id="redTeam2" onclick="trackIndex(this)"></li>
-                <li class="w3-hover-light-grey" id="redTeam3" onclick="trackIndex(this)"></li>
-            </div>
-        </div>
-    </ul>
+    
 </body>
 <script type="text/javascript">
 Parse.initialize("raptors", "nil", "aTech6399");
 Parse.serverURL = 'http://45.55.72.47:1337/parse';
 
 var matchNumber = parseInt(getURIParameter("match"));
+var teamId = getURIParameter("team");
 
 function getURIParameter(param, asArray) {
     return document.location.search.substring(1).split('&').reduce(function(p, c) {
@@ -62,24 +44,13 @@ function getURIParameter(param, asArray) {
     }, []);
 }
 
-var matchObject;
-
 var TeamsQuery = Parse.Object.extend("s1711");
 var query = new Parse.Query(TeamsQuery);
 query.equalTo("number", matchNumber);
 query.first({
     success: function(object) {
-
-        matchObject = object;
-
-        document.getElementById("matchLabel").innerHTML = "Match " + matchNumber;
-
-        document.getElementById("blueTeam1").innerHTML = object.get("blueTeam1")["number"];
-        document.getElementById("blueTeam2").innerHTML = object.get("blueTeam2")["number"];
-        document.getElementById("blueTeam3").innerHTML = object.get("blueTeam3")["number"];
-        document.getElementById("redTeam1").innerHTML = object.get("redTeam1")["number"];
-        document.getElementById("redTeam2").innerHTML = object.get("redTeam2")["number"];
-        document.getElementById("redTeam3").innerHTML = object.get("redTeam3")["number"];
+        var teamObject = object.get(teamId);
+        document.getElementById("matchLabel").innerHTML = "Team " + teamObject["number"];
     },
     error: function(error) {
         alert("Error: " + error.code + " " + error.message);
@@ -87,9 +58,7 @@ query.first({
 });
 
 function trackIndex(who) {
-    var id = who.id;
-    //var teamNumber = matchObject.get(id)["number"];
-    window.open("scoutingmatch.html?match="+matchNumber+"&team="+id, "_self");
+
 }
 </script>
 
