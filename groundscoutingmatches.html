@@ -229,17 +229,17 @@ query.first({
 
 function updateAction() {
 
-    var UpdateQuery = Parse.Object.extend("gs1711");
-    var update = new Parse.Query(UpdateQuery);
+    var UpdateQuery = Parse.Object.extend("gS1711");
+    var update = new UpdateQuery();
     update.equalTo("number", teamNumber);
 
     update.set("canShootHighGoal");
 
     update.save({
-        success: function(update) {
-            saveObject = update;
-            saveObject.set("canShootHighGoal", document.getElementById("tHighGoalSwitch").checked);
-            gameScore.save();
+        success: function(update){
+            updateObject = update;
+            updateObject.set("canShootHighGoal", document.getElementById("tHighGoalSwitch").checked);
+            updateObject.save();
 
             alert("Successfully Updated!");
         }
