@@ -227,14 +227,14 @@ query.first({
         alert("Error: " + error.code + " " + error.message);
     }
 });
-var tHighGSUpdate = document.getElementById("tHighGoalSwitch").checked;
 
 function updateAction() {
 
-    teamObject.set("canShootHighGoal", tHighGSUpdate);
+    teamObject.set("canShootHighGoal", document.getElementById("tHighGoalSwitch").checked);
+    teamObject.set("canShootLowGoal", document.getElementById("tLowGoalSwitch").checked);
     teamObject.save({
         success: function(update) {
-            alert("Successfully Updated!");
+            alert("Successfully Updated!")
         },
         error: function(error) {
             alert("Error: " + error.message);
