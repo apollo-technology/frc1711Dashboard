@@ -13,7 +13,7 @@
 <style>
 .databutton {
     background-color: #50ae55;
-    border-radius:16px;
+    border-radius: 16px;
     color: white;
     padding: 10px;
     text-align: center;
@@ -22,6 +22,7 @@
     margin: 4px 2px;
     cursor: pointer;
 }
+
 .switch {
     position: relative;
     display: inline-block;
@@ -227,21 +228,17 @@ query.first({
     }
 });
 var tHighGSUpdate = document.getElementById("tHighGoalSwitch").checked;
+
 function updateAction() {
 
-    var UpdateQuery = Parse.Object.extend("gS1711");
-    var update = new UpdateQuery();
-    update.equalTo("number", teamNumber);
-
-    update.set("canShootHighGoal");
-
-    update.save({
-        success: function(update){
-            updateObject = update;
-            updateObject.set("canShootHighGoal", tHighGSUpdate);
-            updateObject.save();
-
-            alert("Successfully Updated!");
+    teamObject.set("canShootHighGoal", tHighGSUpdate);
+    //set like that ^
+    teamObject.save({
+        success: function(update) {
+            //complete block
+        },
+        error: function(error) {
+            alert("Error: " + error.message);
         }
     });
 };

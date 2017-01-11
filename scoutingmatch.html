@@ -171,12 +171,16 @@ function getURIParameter(param, asArray) {
     }, []);
 }
 
+var teamObject;
+var teamServerObject;
+
 var TeamsQuery = Parse.Object.extend("s1711");
 var query = new Parse.Query(TeamsQuery);
 query.equalTo("number", matchNumber);
 query.first({
     success: function(object) {
-        var teamObject = object.get(teamId);
+        teamServerObject = object;
+        teamObject = object.get(teamId);
         document.getElementById("matchLabel").innerHTML = "Team " + teamObject["number"];
         document.getElementById("aLowGoalField").value = teamObject["lowGoalAutonCount"];
         document.getElementById("aHighGoalField").value = teamObject["highGoalAutonCount"];
@@ -194,6 +198,32 @@ query.first({
 
 function trackIndex(who) {
 
+}
+
+function updateAction() {
+    var TeamsQuery = Parse.Object.extend("s1711");
+    var query = new Parse.Query(TeamsQuery);
+    query.equalTo("number", matchNumber);
+    query.first({
+        success: function(object) {
+            gameScore.set(teamId, 1337);
+
+            gameScore.save(null, {
+                success: function(gameScore) {
+                    // Execute any logic that should take place after the object is saved.
+
+                },
+                error: function(gameScore, error) {
+                    // Execute any logic that should take place if the save fails.
+                    // error is a Parse.Error with an error code and message.
+                    alert('Failed to save team, with error code: ' + error.message);
+                }
+            });
+        },
+        error: function(error) {
+            alert("Error: " + error.code + " " + error.message);
+        }
+    });
 }
 </script>
 
