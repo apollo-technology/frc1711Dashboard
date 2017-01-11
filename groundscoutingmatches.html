@@ -226,7 +226,7 @@ query.first({
         alert("Error: " + error.code + " " + error.message);
     }
 });
-
+var tHighGSUpdate = document.getElementById("tHighGoalSwitch").checked;
 function updateAction() {
 
     var UpdateQuery = Parse.Object.extend("gS1711");
@@ -238,7 +238,7 @@ function updateAction() {
     update.save({
         success: function(update){
             updateObject = update;
-            updateObject.set("canShootHighGoal", document.getElementById("tHighGoalSwitch").checked);
+            updateObject.set("canShootHighGoal", tHighGSUpdate);
             updateObject.save();
 
             alert("Successfully Updated!");
