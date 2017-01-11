@@ -224,7 +224,7 @@ function updateAction() {
 
     update.set("canShootHighGoal");
 
-    update.save(null, {
+    update.save({
         success: function(update) {
             saveObject = update;
             saveObject.set("canShootHighGoal", document.getElementById("tHighGoalSwitch").checked);
