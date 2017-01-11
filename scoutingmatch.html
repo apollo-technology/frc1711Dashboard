@@ -206,14 +206,24 @@ function updateAction() {
     query.equalTo("number", matchNumber);
     query.first({
         success: function(object) {
-            gameScore.set(teamId, 1337);
-
-            gameScore.save(null, {
-                success: function(gameScore) {
-                    // Execute any logic that should take place after the object is saved.
-
+            var object = {
+                "number": teamObject["number"],
+                "lowGoalTeleopCount": document.getElementById("tLowGoalField").value,
+                "scoreTeleOp": document.getElementById("tFinalScoreField").value,
+                "lowGoalAutonCount": document.getElementById("aLowGoalField").value,
+                "highGoalTeleOpCount": document.getElementById("tHighGoalField").value,
+                "didScale": document.getElementById("scaleRopeSwitch").checked,
+                "didCrossBaseline": document.getElementById("crossBaseLineSwitch").checked,
+                "autonScore": document.getElementById("aFinalScoreField").value,
+                "highGoalAutonCount": document.getElementById("aHighGoalField").value
+            }
+            teamServerObject.set(teamId, object);
+            teamServerObject.save(null, {
+                success: function(teamServerObject) {
+                    // Execute any logic that should take place after the object is saved
+                    window.open("scoutingmatches.html" + "?match="+matchNumber, "_self")
                 },
-                error: function(gameScore, error) {
+                error: function(teamServerObject, error) {
                     // Execute any logic that should take place if the save fails.
                     // error is a Parse.Error with an error code and message.
                     alert('Failed to save team, with error code: ' + error.message);
