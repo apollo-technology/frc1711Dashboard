@@ -11,6 +11,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <style>
+.databutton {
+    background-color: #50ae55;
+    border-radius:16px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 10px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
 .switch {
     position: relative;
     display: inline-block;
@@ -171,8 +182,8 @@ input:checked + .slider:before {
         <div class="teleopSwitchDiv">
             <label class="w3-text-green heightDiv" id="numberLabel"><b>Number: i</b></label>
         </div>
-        <button class="w3-green w3-left w3-round-xlarge" onclick="moreDataAction()">
-            <i class="" style="font-size:20px; color:white">More Data</i>
+        <button class="databutton" onclick="moreDataAction()">
+            <i style="font-size:20px; color:white">More Data</i>
         </button>
     </div>
 </body>
