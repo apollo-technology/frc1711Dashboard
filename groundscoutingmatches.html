@@ -100,7 +100,7 @@ input:checked + .slider:before {
     </ul>
     <div class="w3-container w3-green w3-padding-4">
         <h2 class="w3-text-light-grey w3-green w3-center" id="namenumberLabel">i</h2>
-        <button class="w3-green w3-right w3-round-xxlarge" id="uploadButton">
+        <button class="w3-green w3-right w3-round-xxlarge" onclick="updateAction()">
             <i class="fa fa-cloud-upload" style="font-size:48px; color:white"></i>
         </button>
     </div>
@@ -109,32 +109,32 @@ input:checked + .slider:before {
         <div class="teleopSwitchDiv w3-padding-8">
             <label class="w3-text-green heightDiv"><b>Shoot High Goal</b></label>
             <label class="w3-right switch">
-                <input type="checkbox" id="telHighGoalCheck" unchecked>
-                <div class="slider round" id="telHighGoalSlide"></div>
+                <input type="checkbox" id="tHighGoalSwitch" unchecked>
+                <div class="slider round"></div>
             </label>
         </div>
         <div class="teleopSwitchDiv w3-padding-8">
             <label class="w3-text-green heightDiv"><b>Shoot Low Goal</b></label>
             <label class="w3-right switch">
-                <input type="checkbox" unchecked>
+                <input type="checkbox" id="tLowGoalSwitch" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
         <div class="teleopSwitchDiv w3-padding-8">
             <label class="w3-text-green heightDiv"><b>Deliver Gear</b></label>
             <label class="w3-right switch">
-                <input type="checkbox" unchecked>
+                <input type="checkbox" id="deliverGearSwitch" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
         <div class="w3-padding-8">
             <label class="w3-text-green"><b>Ball Capacity</b></label>
-            <input class="w3-input w3-border" id="ballCapacity" type="number" placeholder="#">
+            <input class="w3-input w3-border" id="ballCapacityField" type="number">
         </div>
         <div class="teleopSwitchDiv w3-padding-8">
             <label class="w3-text-green heightDiv"><b>Scale Rope</b></label>
             <label class="w3-right switch">
-                <input type="checkbox" unchecked>
+                <input type="checkbox" id="scaleSwitch" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
@@ -144,21 +144,21 @@ input:checked + .slider:before {
         <div class="autonSwitchDiv w3-padding-8">
             <label class="w3-text-green heightDiv"><b>Shoot High Goal</b></label>
             <label class="w3-right switch">
-                <input type="checkbox" unchecked>
+                <input type="checkbox" id="aHighGoalSwitch" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
         <div class="autonSwitchDiv w3-padding-8">
             <label class="w3-text-green heightDiv"><b>Shoot Low Goal</b></label>
             <label class="w3-right switch">
-                <input type="checkbox" unchecked>
+                <input type="checkbox" id="aLowGoalSwitch" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
         <div class="autonSwitchDiv w3-padding-8">
             <label class="w3-text-green heightDiv"><b>Cross Base Line</b></label>
             <label class="w3-right switch">
-                <input type="checkbox" unchecked>
+                <input type="checkbox" id="aCrossBaseSwitch" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
@@ -199,20 +199,41 @@ query.equalTo("number", teamNumber);
 query.first({
     success: function(object) {
         teamObject = object;
-        document.getElementById('nameLabel').innerHTML = "Name: " + teamObject.get("name");
-        document.getElementById('numberLabel').innerHTML = "Number: " + teamObject.get("number");
-        document.getElementById('namenumberLabel').innerHTML = teamObject.get("name") + " - " + teamObject.get("number");
-
-        //add the checks like this
-        document.getElementById("inputCheckerId").checked = teamObject.get("parseId");
-
-        //add the text like this
-        document.getElementById("textFieldId").value = teamObject.get("parseId");
+        document.getElementById("nameLabel").innerHTML = "Name: " + teamObject.get("name");
+        document.getElementById("numberLabel").innerHTML = "Number: " + teamObject.get("number");
+        document.getElementById("namenumberLabel").innerHTML = teamObject.get("name") + " - " + teamObject.get("number");
+        document.getElementById("tHighGoalSwitch").checked = teamObject.get("canShootHighGoal");
+        document.getElementById("tLowGoalSwitch").checked = teamObject.get("canShootLowGoal");
+        document.getElementById("deliverGearSwitch").checked = teamObject.get("canDeliverGear");
+        document.getElementById("ballCapacityField").value = teamObject.get("ballCarryingCapacity");
+        document.getElementById("scaleSwitch").checked = teamObject.get("canScale");
+        document.getElementById("aHighGoalSwitch").checked = teamObject.get("autonCanHighGoal");
+        document.getElementById("aLowGoalSwitch").checked = teamObject.get("autonCanLowGoal");
+        document.getElementById("aCrossBaseSwitch").checked = teamObject.get("autonCanCrossBase");
     },
     error: function(error) {
         alert("Error: " + error.code + " " + error.message);
     }
 });
+
+function updateAction() {
+
+    var UpdateQuery = Parse.Object.extend("gs1711");
+    var update = new Parse.Query(UpdateQuery);
+    update.equalTo("number", teamNumber);
+
+    update.set("canShootHighGoal");
+
+    update.save(null, {
+        success: function(update) {
+            saveObject = update;
+            saveObject.set("canShootHighGoal", document.getElementById("tHighGoalSwitch").checked);
+            gameScore.save();
+
+            alert("Successfully Updated!");
+        }
+    });
+};
 
 function moreDataAction() {
     window.open("https://www.thebluealliance.com/team/" + teamNumber);
