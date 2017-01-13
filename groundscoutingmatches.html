@@ -232,9 +232,16 @@ function updateAction() {
 
     teamObject.set("canShootHighGoal", document.getElementById("tHighGoalSwitch").checked);
     teamObject.set("canShootLowGoal", document.getElementById("tLowGoalSwitch").checked);
-    teamObject.save({
+    teamObject.set("canDeliverGear", document.getElementById("deliverGearSwitch").checked);
+    teamObject.set("ballCarryingCapacity", parseInt(document.getElementById("ballCapacityField").value));
+    teamObject.set("canScale", document.getElementById("scaleSwitch").checked);
+    teamObject.set("autonCanHighGoal", document.getElementById("aHighGoalSwitch").checked);
+    teamObject.set("autonCanLowGoal", document.getElementById("aLowGoalSwitch").checked);
+    teamObject.set("autonCanCrossBase", document.getElementById("aCrossBaseSwitch").checked);
+    teamObject.save(null, {
         success: function(update) {
-            alert("Successfully Updated!")
+            alert("Successfully Updated");
+            window.open("groundscouting.html", "_self");
         },
         error: function(error) {
             alert("Error: " + error.message);
@@ -244,6 +251,7 @@ function updateAction() {
 
 function moreDataAction() {
     window.open("https://www.thebluealliance.com/team/" + teamNumber);
+
 };
 </script>
 
