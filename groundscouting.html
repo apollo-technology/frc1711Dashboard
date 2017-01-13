@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="parse.js"></script>
     <script src="w3data.js"></script>
-    <script src="bluealliance.js"></script>
+    <script src="jquery.js"></script>
 </head>
 
 <body class="w3-white">
@@ -78,7 +78,38 @@ query.find({
 });
 
 function resetButton() {
+    var eventKey = prompt("Enter Event Key");
 
+    $.getJSON("https://www.thebluealliance.com/api/v2/event/" + eventKey + "/teams", function(data) {
+        //data is the JSON string
+        if (data) {
+            var eventData = data;
+
+            var ServerClass = Parse.Object.extend("gS1711");
+            var serverObjects = [];
+            for (var i = 0; i < eventData.length; i++) {
+                var teamObject = eventData[i];
+
+                var newTeamObject = new ServerClass();
+                newTeamObject.set("name", teamObject["nickname"]);
+                newTeamObject.set("number", teamObject["team_number"]);
+                serverObjects.push(newTeamObject);
+            }
+
+            Parse.Object.saveAll(serverObjects, {
+                success: function(objects) {
+                    // objects have been saved...
+
+                },
+                error: function(error) {
+                    // an error occurred...
+
+                }
+            });
+        } else {
+            //original data pissed on you
+        }
+    });
 }
 
 function graphPage() {
