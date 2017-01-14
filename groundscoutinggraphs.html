@@ -40,6 +40,9 @@ query.equalTo("number", teamNumber);
 query.first({
     success: function(object) {
         teamObject = object;
+        var graphTName = teamObject.get("name");
+        var graphTNumber = teamObject.get("number");
+        var graphScale = teamObject.get("canScale").checked;
     },
     error: function(error) {
         alert("Error: " + error.code + " " + error.message);
@@ -55,10 +58,7 @@ google.charts.load('current', {'packages':['table']});
         data.addColumn('number', 'Number');
         data.addColumn('boolean', 'Can Scale');
         data.addRows([
-          ['Raptors',  {v: 1711, f: '1711'}, true],
-          ['Robocats',   {v:3452,   f: '3452'},  false],
-          ['Constructors', {v: 4325, f: '43250'}, true],
-          ['Bots',   {v: 1245,  f: '1245'},  true]
+          [Raptors,  {v: 1711, f: 1711}, true]
         ]);
 
         var table = new google.visualization.Table(document.getElementById('showtable'));

@@ -49,6 +49,52 @@
 Parse.initialize("raptors", "nil", "aTech6399");
 Parse.serverURL = 'http://45.55.72.47:1337/parse';
 
+function resetButton() {
+    var eventKey = prompt("Enter Event Key");
+
+    $.getJSON("https://www.thebluealliance.com/api/v2/event/" + eventKey + "/teams", function(data) {
+        //data is the JSON string
+
+        if (data["Error"]) {
+            //there was an error
+            alert("This is not a valid key. Please enter a valid key to continue.");
+
+        } else {
+            if (data) {
+                var eventData = data;
+
+                var ServerClass = Parse.Object.extend("gS1711");
+                var serverObjects = [];
+                for (var i = 0; i < eventData.length; i++) {
+                    var teamObject = eventData[i];
+
+                    var newTeamObject = new ServerClass();
+                    newTeamObject.set("name", teamObject["nickname"]);
+                    newTeamObject.set("number", teamObject["team_number"]);
+                    newTeamObject.set("teamsKey", eventKey);
+                    serverObjects.push(newTeamObject);
+                }
+
+                Parse.Object.saveAll(serverObjects, {
+                    success: function(objects) {
+                        // objects have been saved...
+                        location.reload();
+
+                    },
+                    error: function(error) {
+                        // an error occurred...
+
+                    }
+                });
+            } else {
+                //original data pissed on you
+            }
+        }
+    });
+}
+
+
+
 var teams = [];
 
 var TeamsQuery = Parse.Object.extend("gS1711");
@@ -56,13 +102,13 @@ var query = new Parse.Query(TeamsQuery);
 query.ascending("number");
 query.find({
     success: function(results) {
-        console.log(results);
         for (var i = 0; i < results.length; i++) {
             var object = results[i];
             teams.push({
                 "name": object.get("name"),
                 "number": object.get("number"),
                 "teamId": object.get("objectId"),
+                "key": object.get("teamsKey"),
                 "id": object.id
             });
         }
@@ -76,41 +122,6 @@ query.find({
         alert("Error: " + error.code + " " + error.message);
     }
 });
-
-function resetButton() {
-    var eventKey = prompt("Enter Event Key");
-
-    $.getJSON("https://www.thebluealliance.com/api/v2/event/" + eventKey + "/teams", function(data) {
-        //data is the JSON string
-        if (data) {
-            var eventData = data;
-
-            var ServerClass = Parse.Object.extend("gS1711");
-            var serverObjects = [];
-            for (var i = 0; i < eventData.length; i++) {
-                var teamObject = eventData[i];
-
-                var newTeamObject = new ServerClass();
-                newTeamObject.set("name", teamObject["nickname"]);
-                newTeamObject.set("number", teamObject["team_number"]);
-                serverObjects.push(newTeamObject);
-            }
-
-            Parse.Object.saveAll(serverObjects, {
-                success: function(objects) {
-                    // objects have been saved...
-
-                },
-                error: function(error) {
-                    // an error occurred...
-
-                }
-            });
-        } else {
-            //original data pissed on you
-        }
-    });
-}
 
 function graphPage() {
     window.open("groundscoutinggraphs.html", "_self");
