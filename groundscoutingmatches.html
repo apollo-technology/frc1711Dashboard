@@ -9,6 +9,7 @@
     <script src="w3data.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <style>
 .databutton {
@@ -112,8 +113,11 @@ input:checked + .slider:before {
     </ul>
     <div class="w3-container w3-green w3-padding-4">
         <h2 class="w3-text-light-grey w3-green w3-center" id="namenumberLabel">i</h2>
-        <button class="w3-green w3-right w3-round-xxlarge" onclick="updateAction()">
-            <i class="fa fa-cloud-upload" style="font-size:48px; color:white"></i>
+        <button class="w3-light-grey w3-round-xlarge" onclick="backButton()">
+            <i class="material-icons" style="font-size:35px; color:black">arrow_back</i>
+        </button>
+        <button class="w3-light-grey w3-right w3-round-xxlarge" onclick="updateAction()">
+            <i class="fa fa-cloud-upload" style="font-size:40px; color:#51bbf8"></i>
         </button>
     </div>
     <div class="w3-container w3-card w3-padding-4">
@@ -214,14 +218,14 @@ query.first({
         document.getElementById("nameLabel").innerHTML = "Name: " + teamObject.get("name");
         document.getElementById("numberLabel").innerHTML = "Number: " + teamObject.get("number");
         document.getElementById("namenumberLabel").innerHTML = teamObject.get("name") + " - " + teamObject.get("number");
-        document.getElementById("tHighGoalSwitch").checked = teamObject.get("canShootHighGoal");
-        document.getElementById("tLowGoalSwitch").checked = teamObject.get("canShootLowGoal");
+        document.getElementById("tHighGoalSwitch").checked = teamObject.get("canShootHighGoalTeleOp");
+        document.getElementById("tLowGoalSwitch").checked = teamObject.get("canShootLowGoalTeleOp");
         document.getElementById("deliverGearSwitch").checked = teamObject.get("canDeliverGear");
         document.getElementById("ballCapacityField").value = teamObject.get("ballCarryingCapacity");
         document.getElementById("scaleSwitch").checked = teamObject.get("canScale");
-        document.getElementById("aHighGoalSwitch").checked = teamObject.get("autonCanHighGoal");
-        document.getElementById("aLowGoalSwitch").checked = teamObject.get("autonCanLowGoal");
-        document.getElementById("aCrossBaseSwitch").checked = teamObject.get("autonCanCrossBase");
+        document.getElementById("aHighGoalSwitch").checked = teamObject.get("canShootHighGoalAuton");
+        document.getElementById("aLowGoalSwitch").checked = teamObject.get("canShootLowGoalAuton");
+        document.getElementById("aCrossBaseSwitch").checked = teamObject.get("canCrossBaseline");
     },
     error: function(error) {
         alert("Error: " + error.code + " " + error.message);
@@ -230,14 +234,14 @@ query.first({
 
 function updateAction() {
 
-    teamObject.set("canShootHighGoal", document.getElementById("tHighGoalSwitch").checked);
-    teamObject.set("canShootLowGoal", document.getElementById("tLowGoalSwitch").checked);
+    teamObject.set("canShootHighGoalTeleOp", document.getElementById("tHighGoalSwitch").checked);
+    teamObject.set("canShootLowGoalTeleOp", document.getElementById("tLowGoalSwitch").checked);
     teamObject.set("canDeliverGear", document.getElementById("deliverGearSwitch").checked);
     teamObject.set("ballCarryingCapacity", parseInt(document.getElementById("ballCapacityField").value));
     teamObject.set("canScale", document.getElementById("scaleSwitch").checked);
-    teamObject.set("autonCanHighGoal", document.getElementById("aHighGoalSwitch").checked);
-    teamObject.set("autonCanLowGoal", document.getElementById("aLowGoalSwitch").checked);
-    teamObject.set("autonCanCrossBase", document.getElementById("aCrossBaseSwitch").checked);
+    teamObject.set("canShootHighGoalAuton", document.getElementById("aHighGoalSwitch").checked);
+    teamObject.set("canShootLowGoalAuton", document.getElementById("aLowGoalSwitch").checked);
+    teamObject.set("canCrossBaseline", document.getElementById("aCrossBaseSwitch").checked);
     teamObject.save(null, {
         success: function(update) {
             alert("Successfully Updated");
@@ -248,6 +252,10 @@ function updateAction() {
         }
     });
 };
+
+function backButton() {
+    window.open("groundscouting.html", "_self");
+}
 
 function moreDataAction() {
     window.open("https://www.thebluealliance.com/team/" + teamNumber);

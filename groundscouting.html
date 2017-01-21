@@ -27,11 +27,11 @@
     </ul>
     <div class="w3-container w3-green w3-padding-4">
         <h2 class="w3-text-light-grey w3-green w3-center">Ground Scouting</h2>
-        <button class="w3-btn-floating w3-xlarge w3-text-light-grey w3-green" onclick="resetButton()">
-            <img src="http://www.free-icons-download.net/images/open--trash-can-icon-74608.png" height="85%" width="70%" />
+        <button class="w3-btn-floating w3-xlarge w3-text-light-grey w3-light-grey" onclick="resetButton()">
+            <img src="http://www.free-icons-download.net/images/open--trash-can-icon-74608.png" height="90%" width="75%" />
         </button>
-        <button class="w3-btn-floating w3-green w3-right w3-round-xlarge">
-            <i class="fa fa-bar-chart " style="font-size:24px; color:black" onclick="graphPage()"></i>
+        <button class="w3-btn-floating w3-light-grey w3-right w3-round-large">
+            <i class="fa fa-info-circle" style="font-size:30px; color:black" onclick="infoPage()"></i>
         </button>
     </div>
     <table class="w3-table-all w3-large" id="id01">
@@ -40,7 +40,8 @@
             <th>Number</th>
         </tr>
         <tr w3-repeat="teams" class="w3-ul w3-border w3-hover-green" onclick="trackIndex(this)">
-            <th>{{name}}</th>
+            <th>{{name
+}}</th>
             <th>{{number}}</th>
         </tr>
     </table>
@@ -71,7 +72,6 @@ function resetButton() {
                     var newTeamObject = new ServerClass();
                     newTeamObject.set("name", teamObject["nickname"]);
                     newTeamObject.set("number", teamObject["team_number"]);
-                    newTeamObject.set("teamsKey", eventKey);
                     serverObjects.push(newTeamObject);
                 }
 
@@ -83,6 +83,7 @@ function resetButton() {
                     },
                     error: function(error) {
                         // an error occurred...
+                    Alert("There was an Error. Try Again.");
 
                     }
                 });
@@ -108,7 +109,6 @@ query.find({
                 "name": object.get("name"),
                 "number": object.get("number"),
                 "teamId": object.get("objectId"),
-                "key": object.get("teamsKey"),
                 "id": object.id
             });
         }
@@ -123,8 +123,8 @@ query.find({
     }
 });
 
-function graphPage() {
-    window.open("groundscoutinggraphs.html", "_self");
+function infoPage() {
+    window.open("groundscoutinginfo.html", "_self");
 }
 
 function trackIndex(x) {

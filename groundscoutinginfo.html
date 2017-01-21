@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>frc1711 - Ground Scouting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="parse.js"></script>
+    <script src="w3data.js"></script>
+</head>
+
+<body class="w3-white">
+    <ul class="w3-navbar w3-light-grey">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="groundscouting.html" class="w3-green">Ground Scouting</a></li>
+        <li><a href="scouting.html">Scouting</a></li>
+        <li class="w3-dropdown-hover">
+            <a href="#">More</a>
+            <div class="w3-dropdown-content w3-white w3-card-4">
+                <a href="http://www.raptors1711.com">View 1711 Main Website</a>
+                <a href="https://www.thebluealliance.com/">View The Blue Alliance</a>
+            </div>
+        </li>
+        <li class="w3-right"><img src="" />raptors logo</li>
+    </ul>
+    <div class="w3-container w3-green w3-padding-4">
+        <h2 class="w3-text-light-grey w3-green w3-center">Ground Scouting Analytics</h2>
+        <button class="w3-light-grey w3-round-xlarge" onclick="backButton()">
+            <i class="material-icons" style="font-size:35px; color:black">arrow_back</i>
+        </button>
+        <div class="w3-dropdown-hover">
+            <a class="w3-margin-left" onclick="selectList()">
+                <i class="fa fa-bars" style="font-size:40px; color:black"></i>
+            </a>
+            <div id="dropdown" class="w3-dropdown-content w3-border">
+                <a href="javascript:void(0)" onclick="tHighButton()">Tele High Goal</a>
+                <a href="javascript:void(0)" onclick="tLowButton()">Tele Low Goal</a>
+                <a href="javascript:void(0)" onclick="deliverGearButton()">Deliver Gear</a>
+                <a href="javascript:void(0)" onclick="scaleButton()">Can Scale</a>
+                <a href="javascript:void(0)" onclick="aHighButton()">Auton High Goal</a>
+                <a href="javascript:void(0)" onclick="aLowButton()">Auton Low Goal</a>
+                <a href="javascript:void(0)" onclick="aBaseButton()">Auton Cross Baseline</a>
+            </div>
+        </div>
+    </div>
+    <ul class="w3-ul w3-border w3-center" id="id02">
+        <li>
+            <h2 id="changeTitle">i</h2>
+        </li>
+        <li w3-repeat="teams" class="w3-hover-green">{{name}} - {{number}}</li>
+    </ul>
+</body>
+<script type="text/javascript">
+Parse.initialize("raptors", "nil", "aTech6399");
+Parse.serverURL = 'http://45.55.72.47:1337/parse';
+
+document.getElementById("changeTitle").innerHTML = "Teams That Can" + " " + "Catagory";
+
+var dataObject = {
+    "teams": [{
+        "name": "Select a Category",
+        "number": "Number"
+    }]
+};
+w3DisplayData("id02", dataObject);
+
+
+function backButton() {
+    window.open("groundscouting.html", "_self");
+}
+
+function selectList() {
+    var x = document.getElementById("dropdown");
+    if (x.className.indexOf("w3-show") == -1)
+        x.className += " w3-show";
+    else
+        x.className = x.className.replace(" w3-show", "");
+}
+
+function getArrayForQuery(queryItem) {
+    var teams = [];
+    var TeamsQuery = Parse.Object.extend("gS1711");
+    var query = new Parse.Query(TeamsQuery);
+    query.ascending("number");
+    query.equalTo(queryItem, true);
+    query.find({
+        success: function(results) {
+            for (var i = 0; i < results.length; i++) {
+                var object = results[i];
+                teams.push({
+                    "name": object.get("name"),
+                    "number": object.get("number"),
+                });
+            }
+            var dataObject = {
+                "teams": teams
+            };
+            console.log(dataObject);
+            w3DisplayData("id02", dataObject);
+        },
+        error: function(error) {
+            alert("Error: " + error.code + " " + error.message);
+        }
+    });
+}
+
+function tHighButton() {
+    document.getElementById("changeTitle").innerHTML = "Teams That Can" + " " + "Tele High Goal";
+    getArrayForQuery("canShootHighGoalTeleOp");
+}
+
+function tLowButton() {
+    document.getElementById("changeTitle").innerHTML = "Teams That Can" + " " + "Tele Low Goal";
+    getArrayForQuery("canShootLowGoalTeleOp");
+}
+
+function deliverGearButton() {
+    document.getElementById("changeTitle").innerHTML = "Teams That Can" + " " + "Deliver Gear";
+    getArrayForQuery("canDeliverGear");
+}
+
+function scaleButton() {
+    document.getElementById("changeTitle").innerHTML = "Teams That Can" + " " + "Scale";
+    getArrayForQuery("canScale");
+}
+
+function aHighButton() {
+    document.getElementById("changeTitle").innerHTML = "Teams That Can" + " " + "Auton High Goal";
+    getArrayForQuery("canShootHighGoalAuton");
+}
+
+function aLowButton() {
+    document.getElementById("changeTitle").innerHTML = "Teams That Can" + " " + "Auton Low Goal";
+    getArrayForQuery("canShootHighGoalAuton");
+}
+
+function aBaseButton() {
+    document.getElementById("changeTitle").innerHTML = "Teams That Can" + " " + "Cross Base";
+    getArrayForQuery("canCrossBaseline");
+}
+</script>
+
+</html>
