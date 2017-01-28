@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="w3.css">
     <script src="parse.js"></script>
     <script src="w3data.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body class="w3-white">
@@ -21,9 +22,13 @@
                 <a href="https://www.thebluealliance.com/">View The Blue Alliance</a>
             </div>
         </li>
+        <li class="w3-right w3-padding-right"><img src="https://www.dropbox.com/s/tr3fyaio2tltqh7/raptors_logo_color.png?raw=1" style="width:280px;height:38px;" /></li>
     </ul>
     <div class="w3-container w3-green w3-padding-4">
         <h2 class="w3-text-light-grey w3-green w3-center">Scouting</h2>
+        <button class="w3-btn-floating w3-light-grey w3-right w3-round-large">
+            <i class="fa fa-info-circle" style="font-size:30px; color:black" onclick="infoPage()"></i>
+        </button>
     </div>
     <table class="w3-table-all w3-large" id="id01">
         <tr w3-repeat="teams" class="w3-ul w3-border w3-hover-green" onclick="trackIndex(this)">
@@ -45,7 +50,7 @@ query.find({
         for (var i = 0; i < results.length; i++) {
             var object = results[i];
             teams.push({
-                "match" : "Match " + (i+1)
+                "match": "Match " + (i + 1)
             });
         }
         var dataObject = {
@@ -60,8 +65,12 @@ query.find({
 });
 
 function trackIndex(x) {
-    var index = x.rowIndex+1;
-    window.open("scoutingmatches.html" + "?match="+index, "_self")
+    var index = x.rowIndex + 1;
+    window.open("scoutingmatches.html" + "?match=" + index, "_self")
+}
+
+function infoPage() {
+    window.open("scoutinginfo.html", "_self");
 }
 </script>
 

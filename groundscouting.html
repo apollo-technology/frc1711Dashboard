@@ -23,7 +23,7 @@
                 <a href="https://www.thebluealliance.com/">View The Blue Alliance</a>
             </div>
         </li>
-        <li class="w3-right"><img src="" />raptors logo</li>
+        <li class="w3-right w3-padding-right"><img src="https://www.dropbox.com/s/tr3fyaio2tltqh7/raptors_logo_color.png?raw=1" style="width:280px;height:38px;" /></li>
     </ul>
     <div class="w3-container w3-green w3-padding-4">
         <h2 class="w3-text-light-grey w3-green w3-center">Ground Scouting</h2>
@@ -40,8 +40,8 @@
             <th>Number</th>
         </tr>
         <tr w3-repeat="teams" class="w3-ul w3-border w3-hover-green" onclick="trackIndex(this)">
-            <th>{{name
-}}</th>
+            <th>{{name }}
+            </th>
             <th>{{number}}</th>
         </tr>
     </table>
@@ -53,10 +53,17 @@ Parse.serverURL = 'http://45.55.72.47:1337/parse';
 function resetButton() {
     var eventKey = prompt("Enter Event Key");
 
-    $.getJSON("https://www.thebluealliance.com/api/v2/event/" + eventKey + "/teams", function(data) {
+    var testData = {
+        'Errors': [{
+            'event_id': eventKey + 'is not a valid event id'
+        }]
+    }
+
+    $.getJSON("https://www.thebluealliance.com/api/v2/event/" + eventKey + "/teams?X-TBA-App-Id=1711:dataApp:1", function(data) {
         //data is the JSON string
 
-        if (data["Error"]) {
+
+        if (data == testData) {
             //there was an error
             alert("This is not a valid key. Please enter a valid key to continue.");
 
@@ -72,6 +79,7 @@ function resetButton() {
                     var newTeamObject = new ServerClass();
                     newTeamObject.set("name", teamObject["nickname"]);
                     newTeamObject.set("number", teamObject["team_number"]);
+                    newTeamObject.set("eventKey", eventKey);
                     serverObjects.push(newTeamObject);
                 }
 
@@ -83,7 +91,7 @@ function resetButton() {
                     },
                     error: function(error) {
                         // an error occurred...
-                    Alert("There was an Error. Try Again.");
+                        Alert("There was an Error. Try Again.");
 
                     }
                 });
@@ -101,6 +109,7 @@ var teams = [];
 var TeamsQuery = Parse.Object.extend("gS1711");
 var query = new Parse.Query(TeamsQuery);
 query.ascending("number");
+query.equalTo("eventKey", "2017migay");
 query.find({
     success: function(results) {
         for (var i = 0; i < results.length; i++) {

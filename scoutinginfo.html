@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>frc1711 - Ground Scouting</title>
+    <title>frc1711 - Scouting</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -27,7 +27,7 @@
         <li class="w3-right w3-padding-right"><img src="https://www.dropbox.com/s/tr3fyaio2tltqh7/raptors_logo_color.png?raw=1" style="width:280px;height:38px;" /></li>
     </ul>
     <div class="w3-container w3-green w3-padding-4">
-        <h2 class="w3-text-light-grey w3-green w3-center">Ground Scouting Analytics</h2>
+        <h2 class="w3-text-light-grey w3-green w3-center">Scouting Analytics</h2>
         <button class="w3-light-grey w3-round-xlarge" onclick="backButton()">
             <i class="material-icons" style="font-size:35px; color:black">arrow_back</i>
         </button>
@@ -36,13 +36,13 @@
                 <i class="fa fa-bars" style="font-size:40px; color:black"></i>
             </a>
             <div id="dropdown" class="w3-dropdown-content w3-border">
-                <a href="javascript:void(0)" onclick="tHighButton()">Tele High Goal</a>
-                <a href="javascript:void(0)" onclick="tLowButton()">Tele Low Goal</a>
-                <a href="javascript:void(0)" onclick="deliverGearButton()">Deliver Gear</a>
+                <a href="javascript:void(0)" onclick="tHighButton()">Highest Tele High Count</a>
+                <a href="javascript:void(0)" onclick="tLowButton()">Highest Tele Low Count</a>
+                <a href="javascript:void(0)" onclick="aHighButton()">Highest Auton High Count</a>
+                <a href="javascript:void(0)" onclick="aLowButton()">Highest Auton Low Count</a>
+                <a href="javascript:void(0)" onclick="tScoreButton()">Highest Tele Scores</a>
+                <a href="javascript:void(0)" onclick="aScoreButton()">Highest Auton Scores</a>
                 <a href="javascript:void(0)" onclick="scaleButton()">Can Scale</a>
-                <a href="javascript:void(0)" onclick="aHighButton()">Auton High Goal</a>
-                <a href="javascript:void(0)" onclick="aLowButton()">Auton Low Goal</a>
-                <a href="javascript:void(0)" onclick="aBaseButton()">Auton Cross Baseline</a>
             </div>
         </div>
     </div>
@@ -57,7 +57,7 @@
 Parse.initialize("raptors", "nil", "aTech6399");
 Parse.serverURL = 'http://45.55.72.47:1337/parse';
 
-document.getElementById("changeTitle").innerHTML = "Teams That Can" + " " + "Catagory".italics();
+document.getElementById("changeTitle").innerHTML = "Catagory".italics();
 
 var dataObject = {
     "teams": [{
@@ -69,7 +69,7 @@ w3DisplayData("id02", dataObject);
 
 
 function backButton() {
-    window.open("groundscouting.html", "_self");
+    window.open("scouting.html", "_self");
 }
 
 function selectList() {
@@ -82,7 +82,7 @@ function selectList() {
 
 function getArrayForQuery(queryItem) {
     var teams = [];
-    var TeamsQuery = Parse.Object.extend("gS1711");
+    var TeamsQuery = Parse.Object.extend("s1711");
     var query = new Parse.Query(TeamsQuery);
     query.ascending("number");
     query.equalTo(queryItem, true);
@@ -108,39 +108,38 @@ function getArrayForQuery(queryItem) {
 }
 
 function tHighButton() {
-    document.getElementById("changeTitle").innerHTML = "Teams That Can" + " " + "Tele High Goal";
-    getArrayForQuery("canShootHighGoalTeleOp");
+    document.getElementById("changeTitle").innerHTML = "Highest Tele High Goal Count";
+    getArrayForQuery("highGoalTeleOpCount");
 }
 
 function tLowButton() {
-    document.getElementById("changeTitle").innerHTML = "Teams That Can" + " " + "Tele Low Goal";
-    getArrayForQuery("canShootLowGoalTeleOp");
-}
-
-function deliverGearButton() {
-    getArrayForQuery("canDeliverGear")
-    document.getElementById("changeTitle").innerHTML = "Teams That Can" + " " + "Deliver Gear";
-    
-}
-
-function scaleButton() {
-    document.getElementById("changeTitle").innerHTML = "Teams That Can" + " " + "Scale";
-    getArrayForQuery("canScale");
+    document.getElementById("changeTitle").innerHTML = "Highest Tele Low Goal Count";
+    getArrayForQuery("lowGoalTeleopCount");
 }
 
 function aHighButton() {
-    document.getElementById("changeTitle").innerHTML = "Teams That Can" + " " + "Auton High Goal";
-    getArrayForQuery("canShootHighGoalAuton");
+    document.getElementById("changeTitle").innerHTML = "Highest Auton High Goal Count";
+    getArrayForQuery("highGoalAutonCountx");
 }
 
 function aLowButton() {
-    document.getElementById("changeTitle").innerHTML = "Teams That Can" + " " + "Auton Low Goal";
-    getArrayForQuery("canShootHighGoalAuton");
+    document.getElementById("changeTitle").innerHTML = "Highest Auton Low Goal Count";
+    getArrayForQuery("lowGoalAutonCount");
 }
 
-function aBaseButton() {
-    document.getElementById("changeTitle").innerHTML = "Teams That Can" + " " + "Cross Base";
-    getArrayForQuery("canCrossBaseline");
+function tScoreButton() {
+    document.getElementById("changeTitle").innerHTML = "Highest Tele Score";
+    getArrayForQuery("scoreTeleOp");
+}
+
+function aScoreButton() {
+    document.getElementById("changeTitle").innerHTML = "Highest Auton Score";
+    getArrayForQuery("scoreAuton");
+}
+
+function scaleButton() {
+    document.getElementById("changeTitle").innerHTML = "Teams That Can Scale";
+    getArrayForQuery("didScale");
 }
 </script>
 
