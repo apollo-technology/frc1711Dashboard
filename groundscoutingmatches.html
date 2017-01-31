@@ -13,7 +13,7 @@
 </head>
 <style>
 .databutton {
-    background-color: #50ae55;
+    background-color: #0f68b0;
     border-radius: 16px;
     color: white;
     padding: 10px;
@@ -60,11 +60,11 @@
 }
 
 input:checked + .slider {
-    background-color: #00ae36;
+    background-color: #0f68b0;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #00ae36;
+    box-shadow: 0 0 1px #0f68b0;
 }
 
 input:checked + .slider:before {
@@ -100,7 +100,7 @@ input:checked + .slider:before {
 <body class="w3-white">
     <ul class="w3-navbar w3-light-grey">
         <li><a href="index.html">Home</a></li>
-        <li><a href="groundscouting.html" class="w3-green">Ground Scouting</a></li>
+        <li><a href="groundscouting.html" class="w3-blue">Ground Scouting</a></li>
         <li><a href="scouting.html">Scouting</a></li>
         <li class="w3-dropdown-hover">
             <a href="#">More</a>
@@ -111,8 +111,8 @@ input:checked + .slider:before {
         </li>
         <li class="w3-right w3-padding-right"><img src="https://www.dropbox.com/s/tr3fyaio2tltqh7/raptors_logo_color.png?raw=1" style="width:280px;height:38px;" /></li>
     </ul>
-    <div class="w3-container w3-green w3-padding-4">
-        <h2 class="w3-text-light-grey w3-green w3-center" id="namenumberLabel">i</h2>
+    <div class="w3-container w3-blue w3-padding-4">
+        <h2 class="w3-text-light-grey w3-blue w3-center" id="namenumberLabel">i</h2>
         <button class="w3-light-grey w3-round-xlarge" onclick="backButton()">
             <i class="material-icons" style="font-size:35px; color:black">arrow_back</i>
         </button>
@@ -121,34 +121,34 @@ input:checked + .slider:before {
         </button>
     </div>
     <div class="w3-container w3-card w3-padding-4">
-        <h1 class="w3-text-green">Teleop</h1>
+        <h1 class="w3-text-blue">Teleop</h1>
         <div class="teleopSwitchDiv w3-padding-8">
-            <label class="w3-text-green heightDiv"><b>Shoot High Goal</b></label>
+            <label class="w3-text-blue heightDiv"><b>Shoot High Goal</b></label>
             <label class="w3-right switch">
                 <input type="checkbox" id="tHighGoalSwitch" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
         <div class="teleopSwitchDiv w3-padding-8">
-            <label class="w3-text-green heightDiv"><b>Shoot Low Goal</b></label>
+            <label class="w3-text-blue heightDiv"><b>Shoot Low Goal</b></label>
             <label class="w3-right switch">
                 <input type="checkbox" id="tLowGoalSwitch" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
         <div class="teleopSwitchDiv w3-padding-8">
-            <label class="w3-text-green heightDiv"><b>Deliver Gear</b></label>
+            <label class="w3-text-blue heightDiv"><b>Deliver Gear</b></label>
             <label class="w3-right switch">
                 <input type="checkbox" id="deliverGearSwitch" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
         <div class="w3-padding-8">
-            <label class="w3-text-green"><b>Ball Capacity</b></label>
+            <label class="w3-text-blue"><b>Ball Capacity</b></label>
             <input class="w3-input w3-border" id="ballCapacityField" type="number">
         </div>
         <div class="teleopSwitchDiv w3-padding-8">
-            <label class="w3-text-green heightDiv"><b>Scale Rope</b></label>
+            <label class="w3-text-blue heightDiv"><b>Scale Rope</b></label>
             <label class="w3-right switch">
                 <input type="checkbox" id="scaleSwitch" unchecked>
                 <div class="slider round"></div>
@@ -156,23 +156,23 @@ input:checked + .slider:before {
         </div>
     </div>
     <div class="w3-container w3-card w3-padding-4">
-        <h1 class="w3-text-green">Auton</h1>
+        <h1 class="w3-text-blue">Auton</h1>
         <div class="autonSwitchDiv w3-padding-8">
-            <label class="w3-text-green heightDiv"><b>Shoot High Goal</b></label>
+            <label class="w3-text-blue heightDiv"><b>Shoot High Goal</b></label>
             <label class="w3-right switch">
                 <input type="checkbox" id="aHighGoalSwitch" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
         <div class="autonSwitchDiv w3-padding-8">
-            <label class="w3-text-green heightDiv"><b>Shoot Low Goal</b></label>
+            <label class="w3-text-blue heightDiv"><b>Shoot Low Goal</b></label>
             <label class="w3-right switch">
                 <input type="checkbox" id="aLowGoalSwitch" unchecked>
                 <div class="slider round"></div>
             </label>
         </div>
         <div class="autonSwitchDiv w3-padding-8">
-            <label class="w3-text-green heightDiv"><b>Cross Base Line</b></label>
+            <label class="w3-text-blue heightDiv"><b>Cross Base Line</b></label>
             <label class="w3-right switch">
                 <input type="checkbox" id="aCrossBaseSwitch" unchecked>
                 <div class="slider round"></div>
@@ -180,12 +180,12 @@ input:checked + .slider:before {
         </div>
     </div>
     <div class="w3-container w3-card w3-padding-4">
-        <h1 class="w3-text-green">Team Info</h1>
+        <h1 class="w3-text-blue">Team Info</h1>
         <div class="teleopSwitchDiv">
-            <label class="w3-text-green heightDiv" id="nameLabel"><b>Name: i</b></label>
+            <label class="w3-text-blue heightDiv" id="nameLabel"><b>Name: i</b></label>
         </div>
         <div class="teleopSwitchDiv">
-            <label class="w3-text-green heightDiv" id="numberLabel"><b>Number: i</b></label>
+            <label class="w3-text-blue heightDiv" id="numberLabel"><b>Number: i</b></label>
         </div>
         <button class="databutton" onclick="moreDataAction()">
             <i style="font-size:20px; color:white">More Data</i>

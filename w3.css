@@ -1913,7 +1913,7 @@ input[type=radio].w3-radio:disabled+.w3-validate {
 .w3-blue,
 .w3-hover-blue:hover {
     color: #fff!important;
-    background-color: #2196F3!important
+    background-color: #0f68b0!important
 }
 
 .w3-light-blue,
@@ -1946,6 +1946,12 @@ input[type=radio].w3-radio:disabled+.w3-validate {
 .w3-hover-green:hover {
     color: #fff!important;
     background-color: #4CAF50!important
+}
+
+.w3-hover-frcblue:hover {
+    color: #fff!important;
+    background-color: #0f68b0!important;
+
 }
 
 .w3-light-green,
@@ -2098,7 +2104,7 @@ input[type=radio].w3-radio:disabled+.w3-validate {
 
 .w3-text-blue,
 .w3-hover-text-blue:hover {
-    color: #2196F3!important
+    color: #0f68b0!important
 }
 
 .w3-text-light-blue,

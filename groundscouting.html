@@ -9,12 +9,20 @@
     <script src="parse.js"></script>
     <script src="w3data.js"></script>
     <script src="jquery.js"></script>
+<style>
+
+.frcblue {
+    color: #0f68b0;
+}
+
+</style>
+
 </head>
 
 <body class="w3-white">
     <ul class="w3-navbar w3-light-grey">
         <li><a href="index.html">Home</a></li>
-        <li><a href="groundscouting.html" class="w3-green">Ground Scouting</a></li>
+        <li><a href="groundscouting.html" class="w3-blue">Ground Scouting</a></li>
         <li><a href="scouting.html">Scouting</a></li>
         <li class="w3-dropdown-hover">
             <a href="#">More</a>
@@ -25,8 +33,8 @@
         </li>
         <li class="w3-right w3-padding-right"><img src="https://www.dropbox.com/s/tr3fyaio2tltqh7/raptors_logo_color.png?raw=1" style="width:280px;height:38px;" /></li>
     </ul>
-    <div class="w3-container w3-green w3-padding-4">
-        <h2 class="w3-text-light-grey w3-green w3-center">Ground Scouting</h2>
+    <div class="w3-container w3-blue w3-padding-4">
+        <h2 class="w3-text-light-grey w3-blue w3-center">Ground Scouting</h2>
         <button class="w3-btn-floating w3-xlarge w3-text-light-grey w3-light-grey" onclick="resetButton()">
             <img src="http://www.free-icons-download.net/images/open--trash-can-icon-74608.png" height="90%" width="75%" />
         </button>
@@ -39,7 +47,7 @@
             <th>Team</th>
             <th>Number</th>
         </tr>
-        <tr w3-repeat="teams" class="w3-ul w3-border w3-hover-green" onclick="trackIndex(this)">
+        <tr w3-repeat="teams" class="w3-ul w3-border w3-hover-frcblue" onclick="trackIndex(this)">
             <th>{{name }}
             </th>
             <th>{{number}}</th>
