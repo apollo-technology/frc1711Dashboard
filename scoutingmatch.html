@@ -107,46 +107,46 @@ input:checked + .slider:before {
     </div>
     <div style="width: 90%;margin-top: 180px;" class="w3-display-topmiddle">
         <div class="w3-container w3-padding-8">
-            <h1 class="w3-text-green">Auton</h1>
+            <h1 class="w3-text-blue">Auton</h1>
             <div class="w3-padding-8">
-                <label class="w3-text-green"><b>Low Goals</b></label>
+                <label class="w3-text-blue"><b>Low Goals</b></label>
                 <input class="w3-input w3-border" id="aLowGoalField" type="number">
             </div>
             <div class="w3-padding-8">
-                <label class="w3-text-green"><b>High Goals</b></label>
+                <label class="w3-text-blue"><b>High Goals</b></label>
                 <input class="w3-input w3-border" id="aHighGoalField" type="number">
             </div>
             <div class="w3-padding-8">
-                <label class="w3-text-green"><b>Auton Final Score</b></label>
+                <label class="w3-text-blue"><b>Auton Final Score</b></label>
                 <input class="w3-input w3-border" id="aFinalScoreField" type="text">
             </div>
         </div>
         <div class="w3-container w3-padding-8">
-            <h1 class="w3-text-green">Tele-Op</h1>
+            <h1 class="w3-text-blue">Tele-Op</h1>
             <div class="w3-padding-8">
-                <label class="w3-text-green"><b>Low Goals</b></label>
+                <label class="w3-text-blue"><b>Low Goals</b></label>
                 <input class="w3-input w3-border" id="tLowGoalField" type="number">
             </div>
             <div class="w3-padding-8">
-                <label class="w3-text-green"><b>High Goals</b></label>
+                <label class="w3-text-blue"><b>High Goals</b></label>
                 <input class="w3-input w3-border" id="tHighGoalField" type="number">
             </div>
             <div class="w3-padding-8">
-                <label class="w3-text-green"><b>Tele-Op Final Score</b></label>
+                <label class="w3-text-blue"><b>Tele-Op Final Score</b></label>
                 <input class="w3-input w3-border" id="tFinalScoreField" type="text">
             </div>
         </div>
         <div class="w3-container w3-padding-8">
-            <h1 class="w3-text-green">Stats</h1>
+            <h1 class="w3-text-blue">Stats</h1>
             <div class="autonSwitchDiv">
-                <label class="w3-text-green heightDiv"><b>Cross Base Line</b></label>
+                <label class="w3-text-blue heightDiv"><b>Cross Base Line</b></label>
                 <label class="w3-right switch">
                     <input type="checkbox" id="crossBaseLineSwitch" checked>
                     <div class="slider round"></div>
                 </label>
             </div>
             <div class="autonSwitchDiv">
-                <label class="w3-text-green heightDiv"><b>Scale Rope</b></label>
+                <label class="w3-text-blue heightDiv"><b>Scale Rope</b></label>
                 <label class="w3-right switch">
                     <input type="checkbox" id="scaleRopeSwitch" checked>
                     <div class="slider round"></div>
@@ -181,14 +181,15 @@ query.equalTo("number", matchNumber);
 query.first({
     success: function(object) {
         teamServerObject = object;
+        console.log(object);
         teamObject = object.get(teamId);
         document.getElementById("matchLabel").innerHTML = "Team " + teamObject["number"];
-        document.getElementById("aLowGoalField").value = teamObject["lowGoalAutonCount"];
-        document.getElementById("aHighGoalField").value = teamObject["highGoalAutonCount"];
-        document.getElementById("aFinalScoreField").value = teamObject["autonScore"];
-        document.getElementById("tLowGoalField").value = teamObject["lowGoalTeleopCount"];
-        document.getElementById("tHighGoalField").value = teamObject["highGoalTeleOpCount"];
-        document.getElementById("tFinalScoreField").value = teamObject["scoreTeleOp"];
+        document.getElementById("aLowGoalField").value = teamObject["lowGoalCountAuton"];
+        document.getElementById("aHighGoalField").value = teamObject["highGoalCountAuton"];
+        document.getElementById("aFinalScoreField").value = teamObject["finalScoreAuton"];
+        document.getElementById("tLowGoalField").value = teamObject["lowGoalCountTeleOp"];
+        document.getElementById("tHighGoalField").value = teamObject["highGoalCountTeleOp"];
+        document.getElementById("tFinalScoreField").value = teamObject["finalScoreTeleOp"];
         document.getElementById("crossBaseLineSwitch").checked = teamObject["didCrossBaseline"];
         document.getElementById("scaleRopeSwitch").checked = teamObject["didScale"];
     },
