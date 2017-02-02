@@ -55,8 +55,8 @@
     </table>
 </body>
 <script type="text/javascript">
-Parse.initialize("raptors", "nil", "aTech6399");
-Parse.serverURL = 'http://45.55.72.47:1337/parse';
+Parse.initialize("frc1711", "nil");
+Parse.serverURL = 'http://api.apollotechnology.co:1002';
 
 function resetButton() {
     var eventKey = prompt("Enter Event Key");
@@ -117,7 +117,6 @@ var teams = [];
 var TeamsQuery = Parse.Object.extend("gS1711");
 var query = new Parse.Query(TeamsQuery);
 query.ascending("number");
-query.equalTo("eventKey", "2017migay");
 query.find({
     success: function(results) {
         for (var i = 0; i < results.length; i++) {
