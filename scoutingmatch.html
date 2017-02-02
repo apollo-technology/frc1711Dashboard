@@ -8,6 +8,7 @@
     <script src="parse.js"></script>
     <script src="w3data.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <style type="text/css">
 .switch {
@@ -101,8 +102,11 @@ input:checked + .slider:before {
         <h2 class="w3-text-light-grey w3-blue w3-center" id="matchLabel"></h2>
     </div>
     <div class="w3-container w3-blue w3-padding-4">
-        <button class="w3-blue w3-right w3-round-xxlarge" onclick="updateAction()">
-            <i class="fa fa-cloud-upload" style="font-size:48px; color:white"></i>
+        <button class="w3-light-grey w3-round-xlarge" onclick="backButton()">
+            <i class="material-icons" style="font-size:35px; color:black">arrow_back</i>
+        </button>
+        <button class="w3-light-grey w3-right w3-round-xxlarge" onclick="updateAction()">
+            <i class="fa fa-cloud-upload" style="font-size:40px; color:#0f68b0"></i>
         </button>
     </div>
     <div style="width: 90%;margin-top: 180px;" class="w3-display-topmiddle">
@@ -200,6 +204,10 @@ query.first({
 
 function trackIndex(who) {
 
+}
+
+function backButton(){
+    window.open("scoutingmatches.html?match=" + getURIParameter("match"),"_self");
 }
 
 function updateAction() {

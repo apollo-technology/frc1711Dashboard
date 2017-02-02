@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="w3.css">
     <script src="parse.js"></script>
     <script src="w3data.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body class="w3-white">
@@ -25,6 +27,9 @@
     </ul>
     <div class="w3-container w3-blue w3-padding-4">
         <h2 class="w3-text-light-grey w3-blue w3-center" id="matchLabel"></h2>
+        <button class="w3-light-grey w3-round-xlarge" onclick="backButton()">
+            <i class="material-icons" style="font-size:35px; color:black">arrow_back</i>
+        </button>
     </div>
     <ul class="w3-ul w3-border">
         <div class="w3-row">
@@ -87,10 +92,14 @@ query.first({
     }
 });
 
+function backButton() {
+    window.open("scouting.html", "_self");
+}
+
 function trackIndex(who) {
     var id = who.id;
     //var teamNumber = matchObject.get(id)["number"];
-    window.open("scoutingmatch.html?match="+matchNumber+"&team="+id, "_self");
+    window.open("scoutingmatch.html?match=" + matchNumber + "&team=" + id, "_self");
 }
 </script>
 
