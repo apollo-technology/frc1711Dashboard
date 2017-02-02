@@ -5,6 +5,8 @@
     <title>frc1711 - Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="w3.css">
+    <script src="sinch.js"></script>
+    <script src="parse.js"></script>
 </head>
 <style>
 body,
@@ -19,6 +21,28 @@ html {
     background-size: cover;
 }
 </style>
+<div id="loadingView" class="w3-modal">
+    <div class="w3-modal-content">
+        <div class="w3-container">
+            <p>Signing you in.</p>
+        </div>
+    </div>
+</div>
+<div id="loginView" class="w3-modal">
+    <div class="w3-modal-content w3-card-8 w3-animate-zoom" style="max-width:600px">
+        <div class="w3-center">
+            <br>
+            <img src="frcIcon.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+        </div>
+        <div class="w3-container">
+            <div class="w3-section">
+                <label id="label"><b>Phone Number</b></label>
+                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Phone Number" id="phoneField" required>
+                <button class="w3-btn-block w3-blue w3-section w3-padding" id="loginButton" type="submit" onclick="loginAction()">Login</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <body class="w3-white">
     <ul class="w3-navbar w3-light-grey">
@@ -45,5 +69,50 @@ html {
         </div>
     </div>
 </body>
+<script type="text/javascript">
+Parse.initialize("frc1711", "nil");
+Parse.serverURL = 'http://api.apollotechnology.co:1002';
+
+var currentUser = Parse.User.current();
+if (!currentUser) {
+    document.getElementById('loginView').style.display = 'block';
+}
+
+function loginAction() {
+    var sinchClient = new SinchClient({
+        applicationKey: "e53ee320-4d09-49f2-a443-b9194b8e49fa"
+    })
+    var phoneField = document.getElementById("phoneField");
+    var givenNumber = phoneField.value;
+    var verification = sinchClient.createSmsVerification(phoneField.value);
+    verification.initiate().then(function(successInfo) {
+        phoneField.placeholder = "Code";
+        phoneField.value = "";
+        document.getElementById("label").innerHTML = "Enter Code"
+        var loginButton = document.getElementById("loginButton");
+        loginButton.onclick = function() {
+            var code = phoneField.value;
+            verification.verify(code).then(function(successInfo) {
+                document.getElementById('loginView').style.display = 'none';
+                document.getElementById('loadingView').style.display = 'block';
+                Parse.User.logIn(givenNumber, "raptors", {
+                    success: function(user) {
+                        // Do stuff after successful login.
+                        document.getElementById('loadingView').style.display = 'none';
+                    },
+                    error: function(user, error) {
+                        // The login failed. Check error to see why.
+                        
+                    }
+                });
+            }).fail(function(errorInfo) {
+                console.error("NO");
+            });
+        }
+    }).fail(function(errorInfo) {
+        // Act on error
+    });
+}
+</script>
 
 </html>

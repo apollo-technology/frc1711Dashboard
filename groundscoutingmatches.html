@@ -197,6 +197,11 @@ input:checked + .slider:before {
 Parse.initialize("frc1711", "nil");
 Parse.serverURL = 'http://api.apollotechnology.co:1002';
 
+var currentUser = Parse.User.current();
+if (!currentUser) {
+    window.open("index.html","_self");
+}
+
 var teamNumber = parseInt(getURIParameter("number"));
 var teamObject;
 
