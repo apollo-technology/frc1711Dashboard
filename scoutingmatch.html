@@ -210,14 +210,14 @@ function updateAction() {
         success: function(object) {
             var object = {
                 "number": teamObject["number"],
-                "lowGoalTeleopCount": document.getElementById("tLowGoalField").value,
-                "scoreTeleOp": document.getElementById("tFinalScoreField").value,
-                "lowGoalAutonCount": document.getElementById("aLowGoalField").value,
-                "highGoalTeleOpCount": document.getElementById("tHighGoalField").value,
+                "lowGoalCountTeleOp": document.getElementById("tLowGoalField").value,
+                "finalScoreTeleOp": document.getElementById("tFinalScoreField").value,
+                "lowGoalCountAuton": document.getElementById("aLowGoalField").value,
+                "highGoalCountTeleOp": document.getElementById("tHighGoalField").value,
                 "didScale": document.getElementById("scaleRopeSwitch").checked,
                 "didCrossBaseline": document.getElementById("crossBaseLineSwitch").checked,
-                "autonScore": document.getElementById("aFinalScoreField").value,
-                "highGoalAutonCount": document.getElementById("aHighGoalField").value
+                "finalScoreAuton": document.getElementById("aFinalScoreField").value,
+                "highGoalCountAuton": document.getElementById("aHighGoalField").value
             }
             teamServerObject.set(teamId, object);
             teamServerObject.save(null, {
