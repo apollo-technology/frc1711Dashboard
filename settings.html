@@ -13,11 +13,11 @@
     .frcblue {
         color: #0f68b0;
     }
-
+    
     .frcblue-background {
         background-color: #0f68b0;
     }
-
+    
     .divheight {
         margin-top: 20px;
         margin-bottom: 20px;
@@ -46,13 +46,25 @@
     <div class="w3-container w3-card w3-padding-8">
         <div class="w3-padding-8">
             <label class="w3-text-blue" style="font-size: 20px;"><b>Add Event Key</b></label>
-            <button class="w3-right w3-btn w3-round w3-ripple frcblue-background">Set</button>
+            <button class="w3-right w3-btn w3-round w3-ripple frcblue-background" onclick="newEvent()">Set</button>
+        </div>
+    </div>
+    <div class="w3-padding-8">
+    </div>
+    <div class="w3-container w3-card w3-padding-8">
+        <div class="w3-padding-8">
+            <label class="w3-text-blue" style="font-size: 20px;"><b>Other Setting</b></label>
+            <button class="w3-right w3-btn w3-round w3-ripple frcblue-background" onclick="">Button</button>
         </div>
     </div>
 </body>
 <script type="text/javascript">
 Parse.initialize("frc1711", "nil");
 Parse.serverURL = 'http://api.apollotechnology.co:1002';
+
+function newEvent() {
+    var eventKey = prompt("Enter Event Key");
+}
 </script>
 
 </html>
