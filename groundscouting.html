@@ -33,12 +33,20 @@
     </ul>
     <div class="w3-container w3-blue w3-padding-4">
         <h2 class="w3-text-light-grey w3-blue w3-center">Ground Scouting</h2>
-        <div class="w3-dropdown-click">
-            <button class="w3-btn-floating w3-light-grey w3-left w3-round-large" onclick="selectList()">
-                <i class="fa fa-caret-square-o-down" style="font-size:30px; color:black"></i>
-            </button>
-            <div id="dropdown" class="w3-dropdown-content w3-border">
-                <a href="javascript:void(0)" onclick="itemButton()">Item1</a>
+        <button class="w3-btn-floating w3-light-grey w3-left w3-round-large" onclick="document.getElementById('modal').style.display='block'">
+            <i class="fa fa-caret-square-o-down" style="font-size:30px; color:black"></i>
+        </button>
+        <div id="modal" class="w3-modal">
+            <div class="w3-modal-content">
+                <div class="w3-container">
+                    <span onclick="document.getElementById('modal').style.display='none'" class="w3-closebtn">&times;</span>
+                    <table class="w3-table-all w3-large">
+                        <tr>
+                            <th>Some Stuff</th>
+                            <th>some other stuff</th>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
         <button class="w3-btn-floating w3-light-grey w3-right w3-round-large">
@@ -51,8 +59,12 @@
             <th>Number</th>
         </tr>
         <tr w3-repeat="teams" class="w3-ul w3-border w3-hover-frcblue" onclick="trackIndex(this)">
+<<<<<<< Updated upstream
             <th>{{name}}
             </th>
+=======
+            <th>{{name}}</th>
+>>>>>>> Stashed changes
             <th>{{number}}</th>
         </tr>
     </table>
@@ -60,14 +72,6 @@
 <script type="text/javascript">
 Parse.initialize("frc1711", "nil");
 Parse.serverURL = 'http://api.apollotechnology.co:1002';
-
-function selectList() {
-    var x = document.getElementById("dropdown");
-    if (x.className.indexOf("w3-show") == -1)
-        x.className += " w3-show";
-    else
-        x.className = x.className.replace(" w3-show", "");
-}
 
 var currentUser = Parse.User.current();
 if (!currentUser) {
