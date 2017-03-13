@@ -66,23 +66,13 @@
 Parse.initialize("frc1711", "nil");
 Parse.serverURL = 'http://api.apollotechnology.co:1002';
 
-// <<<<<<< HEAD
-// function selectList() {
-//     var x = document.getElementById("dropdown");
-//     if (x.className.indexOf("w3-show") == -1)
-//         x.className += " w3-show";
-//     else
-//         x.className = x.className.replace(" w3-show", "");
-// }
-
-// =======
-// var currentUser = Parse.User.current();
-// if (!currentUser) {
-//     window.open("index.html", "_self");
-// }
-
-
-// >>>>>>> origin/gh-pages
+function selectList() {
+    var x = document.getElementById("dropdown");
+    if (x.className.indexOf("w3-show") == -1)
+        x.className += " w3-show";
+    else
+        x.className = x.className.replace(" w3-show", "");
+}
 
 var teams = [];
 
@@ -121,7 +111,7 @@ function itemButton() {
 }
 
 function trackIndex(x) {
-    var index = x.rowIndex - 1;
+    var index = x.rowIndex;
     window.open("groundscoutingmatches.html?number=" + teams[index]["number"], "_self");
 };
 </script>
