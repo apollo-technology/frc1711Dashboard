@@ -5,6 +5,7 @@
     <title>frc1711 - Scouting</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="w3.css">
+    <script src="cookie.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -22,7 +23,7 @@
             <div class="w3-dropdown-content w3-white w3-card-4">
                 <a href="http://www.raptors1711.com">View 1711 Main Website</a>
                 <a href="https://www.thebluealliance.com/">View The Blue Alliance</a>
-                <a href="settings.html"/>Settings</a>
+                <a href="settings.html"/>Sign Out</a>
             </div>
         </li>
         <li class="w3-right w3-padding-right"><img src="https://www.dropbox.com/s/tr3fyaio2tltqh7/raptors_logo_color.png?raw=1" style="width:280px;height:38px;" /></li>
@@ -58,10 +59,6 @@
 Parse.initialize("frc1711", "nil");
 Parse.serverURL = 'http://api.apollotechnology.co:1002';
 
-var currentUser = Parse.User.current();
-if (!currentUser) {
-    window.open("index.html","_self");
-}
 
 document.getElementById("changeTitle").innerHTML = "Catagory".italics();
 

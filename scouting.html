@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="w3.css">
     <script src="parse.js"></script>
     <script src="w3data.js"></script>
+    <script src="cookie.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -20,17 +21,17 @@
             <div class="w3-dropdown-content w3-white w3-card-4">
                 <a href="http://www.raptors1711.com">View 1711 Main Website</a>
                 <a href="https://www.thebluealliance.com/">View The Blue Alliance</a>
-                <a href="settings.html"/>Settings</a>
+                <a href="settings.html"/>Sign Out</a>
             </div>
         </li>
         <li class="w3-right w3-padding-right"><img src="https://www.dropbox.com/s/tr3fyaio2tltqh7/raptors_logo_color.png?raw=1" style="width:280px;height:38px;" /></li>
     </ul>
-    <div class="w3-container w3-blue w3-padding-4">
+    <!-- <div class="w3-container w3-blue w3-padding-4">
         <h2 class="w3-text-light-grey w3-blue w3-center">Scouting</h2>
         <button class="w3-btn-floating w3-light-grey w3-right w3-round-large">
             <i class="fa fa-info-circle" style="font-size:30px; color:black" onclick="infoPage()"></i>
         </button>
-    </div>
+    </div> -->
     <table class="w3-table-all w3-large" id="id01">
         <tr w3-repeat="teams" class="w3-ul w3-border w3-hover-blue" onclick="trackIndex(this)">
             <th>{{match}}</th>
@@ -41,16 +42,12 @@
 Parse.initialize("frc1711", "nil");
 Parse.serverURL = 'http://api.apollotechnology.co:1002';
 
-var currentUser = Parse.User.current();
-if (!currentUser) {
-    window.open("index.html","_self");
-}
-
 var teams = [];
 
-var TeamsQuery = Parse.Object.extend("s1711");
+var TeamsQuery = Parse.Object.extend("s"+getCookie("team"));
 var query = new Parse.Query(TeamsQuery);
 query.ascending("number");
+query.equalTo("eventKey", getCookie("event"));
 query.find({
     success: function(results) {
         for (var i = 0; i < results.length; i++) {

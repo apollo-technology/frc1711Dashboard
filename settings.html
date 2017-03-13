@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="cookie.js"></script>
     <script src="parse.js"></script>
     <script src="w3data.js"></script>
     <script src="jquery.js"></script>
@@ -35,35 +36,32 @@
             <div class="w3-dropdown-content w3-white w3-card-4">
                 <a href="http://www.raptors1711.com">View 1711 Main Website</a>
                 <a href="https://www.thebluealliance.com/">View The Blue Alliance</a>
-                <a href="settings.html" />Settings</a>
+                <a href="settings.html" />Sign Out</a>
             </div>
         </li>
         <li class="w3-right w3-padding-right"><img src="https://www.dropbox.com/s/tr3fyaio2tltqh7/raptors_logo_color.png?raw=1" style="width:280px;height:38px;" /></li>
     </ul>
     <div class="w3-container w3-blue w3-padding-4">
-        <h2 class="w3-text-light-grey w3-blue w3-center">Settings</h2>
+        <h2 class="w3-text-light-grey w3-blue w3-center">Sign Out</h2>
     </div>
-    <div class="w3-container w3-card w3-padding-8">
-        <div class="w3-padding-8">
-            <label class="w3-text-blue" style="font-size: 20px;"><b>Add Event Key</b></label>
-            <button class="w3-right w3-btn w3-round w3-ripple frcblue-background" onclick="newEvent()">Set</button>
+    </div>
+    <center>
+        <div class="w3-container w3-card w3-padding-8" style="width:40%;">
+            <div class="w3-padding-8">
+                <label class="w3-text-blue" style="font-size: 20px;"><b>Are you sure?</b></label>
+                <button class="w3-right w3-btn w3-round w3-ripple frcblue-background" onclick="leave();">Yes</button>
+            </div>
         </div>
-    </div>
-    <div class="w3-padding-8">
-    </div>
-    <div class="w3-container w3-card w3-padding-8">
-        <div class="w3-padding-8">
-            <label class="w3-text-blue" style="font-size: 20px;"><b>Other Setting</b></label>
-            <button class="w3-right w3-btn w3-round w3-ripple frcblue-background" onclick="">Button</button>
-        </div>
-    </div>
+    </center>
 </body>
 <script type="text/javascript">
 Parse.initialize("frc1711", "nil");
 Parse.serverURL = 'http://api.apollotechnology.co:1002';
 
-function newEvent() {
-    var eventKey = prompt("Enter Event Key");
+function leave() {
+    setCookie("team", 0);
+    setCookie("event", 0);
+    window.open("index.html", "_self");
 }
 </script>
 

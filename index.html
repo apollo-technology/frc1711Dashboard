@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="w3.css">
     <script src="sinch.js"></script>
     <script src="parse.js"></script>
+    <script src="cookie.js"></script>
 </head>
 <style>
 body,
@@ -36,9 +37,11 @@ html {
         </div>
         <div class="w3-container">
             <div class="w3-section">
-                <label id="label"><b>Phone Number</b></label>
-                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Phone Number" id="phoneField" required>
-                <button class="w3-btn-block w3-blue w3-section w3-padding" id="loginButton" type="submit" onclick="loginAction()">Login</button>
+                <label id="label"><b>Team Number</b></label>
+                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Team Number" id="teamField" required>
+                <label id="label"><b>Event Key</b></label>
+                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Event Key" id="eventField" required>
+                <button class="w3-btn-block w3-blue w3-section w3-padding" id="loginButton" type="submit" onclick="loginAction()">Access Database</button>
             </div>
         </div>
     </div>
@@ -54,13 +57,13 @@ html {
             <div class="w3-dropdown-content w3-white w3-card-4">
                 <a href="http://www.raptors1711.com">View 1711 Main Website</a>
                 <a href="https://www.thebluealliance.com/">View The Blue Alliance</a>
-                <a href="settings.html"/>Settings</a>
+                <a href="settings.html" />Sign Out</a>
             </div>
         </li>
         <li class="w3-right w3-padding-right"><img src="raptorlogo.png" style="width:280px;height:38px;" /></li>
     </ul>
     <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
-        <div class="w3-display-middle" style="background-color: rgba(0,0,0,.5);border-radius: 40px;">
+        <div class="w3-display-middle" style="background-color: rgba(0,0,0,0);border-radius: 40px;">
             <h1 class="w3-jumbo w3-center"><b>FRC 1711 Dashboard</b></h1>
             <hr class="w3-border-grey" style="margin:auto;width:40%">
             <center>
@@ -72,46 +75,22 @@ html {
 <script type="text/javascript">
 Parse.initialize("frc1711", "nil");
 Parse.serverURL = 'http://api.apollotechnology.co:1002';
-
-var currentUser = Parse.User.current();
-if (!currentUser) {
+var team = getCookie("team");
+var event = getCookie("event");
+if (!team | team == 0) {
     document.getElementById('loginView').style.display = 'block';
+} else {
+    if (!event | event == 0) {
+        document.getElementById('loginView').style.display = 'block';
+    }
 }
 
+console.log(team + event);
+
 function loginAction() {
-    var sinchClient = new SinchClient({
-        applicationKey: "e53ee320-4d09-49f2-a443-b9194b8e49fa"
-    })
-    var phoneField = document.getElementById("phoneField");
-    var givenNumber = phoneField.value;
-    var verification = sinchClient.createSmsVerification(phoneField.value);
-    verification.initiate().then(function(successInfo) {
-        phoneField.placeholder = "Code";
-        phoneField.value = "";
-        document.getElementById("label").innerHTML = "Enter Code"
-        var loginButton = document.getElementById("loginButton");
-        loginButton.onclick = function() {
-            var code = phoneField.value;
-            verification.verify(code).then(function(successInfo) {
-                document.getElementById('loginView').style.display = 'none';
-                document.getElementById('loadingView').style.display = 'block';
-                Parse.User.logIn(givenNumber, "raptors", {
-                    success: function(user) {
-                        // Do stuff after successful login.
-                        document.getElementById('loadingView').style.display = 'none';
-                    },
-                    error: function(user, error) {
-                        // The login failed. Check error to see why.
-                        
-                    }
-                });
-            }).fail(function(errorInfo) {
-                console.error("NO");
-            });
-        }
-    }).fail(function(errorInfo) {
-        // Act on error
-    });
+    setCookie("team", document.getElementById("teamField").value);
+    setCookie("event", document.getElementById("eventField").value);
+    window.open("index.html","_self");
 }
 </script>
 
